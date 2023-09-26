@@ -23,7 +23,7 @@ public class Member {
 
 
     @Column(nullable = false, length = 50)
-    private String userName; //유저명
+    private String userNm; //유저명
 
     @Column(name="userEmail", nullable = false, unique = true)
     private String userEmail; //이메일

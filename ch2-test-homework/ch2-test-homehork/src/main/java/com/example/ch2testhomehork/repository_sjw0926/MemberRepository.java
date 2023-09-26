@@ -8,6 +8,7 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 // 레거시 ,
 // 동네 1 ~ 4, 비유,
@@ -17,27 +18,25 @@ import java.util.List;
 // 임시로 사용하기 위해서, 메모리 위에 작업을 한다.
 // 기본설정 파일과, 테스트를 위한 설정 파일을 2개 분리해서 작업 중.
 
-//public interface ItemRepository extends JpaRepository<Item, Long> {
-    public interface MemberRepository extends JpaRepository<Member, Long>, QuerydslPredicateExecutor<Member> {
-//
-//    여러개의 쿼리 메소드 중에서, 조회 부분 보고,
-//    조회하는 옵션을 하나씩 볼 예정.
-    List<Item> findByItemNm(String itemNm);
-//
-    List<Item> findByItemNmOrItemDetail(String itemNm, String itemDetail);
-//
-    List<Item> findByPriceLessThan(Integer price);
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    //public interface MemberRepository extends JpaRepository<Member, Long>, QuerydslPredicateExecutor<Member> {
 
-    List<Item> findByPriceLessThanOrderByPriceDesc(Integer price);
 
-    List<Item> findByPriceLessThanOrderByPriceAsc(Integer price);
+    List<Member> findByUserNm(String userNm);
 
-    @Query("select i from Item i where i.itemDetail like " +
-            "%:itemDetail% order by i.price desc")
-    List<Item> findByItemDetail(@Param("itemDetail") String itemDetail);
+    List<Member> findByUserDescription(String userDescription);
+
+   List<Member> findByUserNmOrUserDescription(String userNm, String userDescription);
+
+    //Optional<Member> findById(Long id);
+
+
+    @Query("select m from Member m where m.userDescription like " +
+            "%:userDescription% order by m.regTime desc")
+    List<Member> findByUserDescription2(@Param("userDescription") String userDescription);
 //
-    @Query(value="select * from item i where i.item_detail like " +
+/*    @Query(value="select * from Member i where i.item_detail like " +
             "%:itemDetail% order by i.price desc", nativeQuery = true)
-    List<Item> findByItemDetailByNative(@Param("itemDetail") String itemDetail);
+    List<Member> findByItemDetailByNative(@Param("itemDetail") String itemDetail);*/
 
 }
