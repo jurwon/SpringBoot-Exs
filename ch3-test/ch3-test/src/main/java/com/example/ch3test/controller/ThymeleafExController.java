@@ -1,5 +1,6 @@
 package com.example.ch3test.controller;
 
+import com.example.ch3test.dto.ItemDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +21,10 @@ public class ThymeleafExController {
         return "thymeleafEx/thymeleafEx01";
     }
 
-   /* @GetMapping(value = "/ex02")
+    @GetMapping(value = "/ex02")
     public String thymeleafExample02(Model model){
         ItemDto itemDto = new ItemDto();
-        itemDto.setItemDetail("상품 상세 설명");
+        itemDto.setItemDetail("상품 상세 설명??");
         itemDto.setItemNm("테스트 상품1");
         itemDto.setPrice(10000);
         itemDto.setRegTime(LocalDateTime.now());
@@ -31,7 +32,7 @@ public class ThymeleafExController {
         model.addAttribute("itemDto", itemDto);
         return "thymeleafEx/thymeleafEx02";
     }
-
+/*
     @GetMapping(value = "/ex03")
     public String thymeleafExample03(Model model){
 
