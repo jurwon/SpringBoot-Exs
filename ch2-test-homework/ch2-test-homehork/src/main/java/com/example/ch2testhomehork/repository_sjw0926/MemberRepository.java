@@ -31,12 +31,14 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     //Optional<Member> findById(Long id);
 
 
+
     @Query("select m from Member m where m.userDescription like " +
             "%:userDescription% order by m.regTime desc")
     List<Member> findByUserDescription2(@Param("userDescription") String userDescription);
-//
-/*    @Query(value="select * from Member i where i.item_detail like " +
-            "%:itemDetail% order by i.price desc", nativeQuery = true)
-    List<Member> findByItemDetailByNative(@Param("itemDetail") String itemDetail);*/
+
+    //Native Query 사용하면 DB컬럼명까지 맞춰줘야함
+    @Query(value="select * from Member m where m.user_Description like " +
+            "%:userDescription% order by  m.reg_Time desc", nativeQuery = true)
+    List<Member> findByUserDescriptionByNative(@Param("userDescription") String userDescription);
 
 }

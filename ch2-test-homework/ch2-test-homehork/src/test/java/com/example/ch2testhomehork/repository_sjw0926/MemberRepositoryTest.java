@@ -2,10 +2,14 @@ package com.example.ch2testhomehork.repository_sjw0926;
 
 import com.example.ch2testhomehork.constant_sjw0926.UserRole;
 import com.example.ch2testhomehork.entity_sjw0926.Member;
+import com.example.ch2testhomehork.entity_sjw0926.QMember;
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.support.Querydsl;
 import org.springframework.test.context.TestPropertySource;
 
 import javax.persistence.EntityManager;
@@ -25,7 +29,7 @@ class MemberRepositoryTest {
     @Autowired
     MemberRepository memberRepository;
 
-    // 영속성 컨텍스트 기능 이용하기위한, 엔티티 매니저 인스턴스
+    // dsl사용시 필요
     @PersistenceContext
     EntityManager em;
 
@@ -92,7 +96,7 @@ class MemberRepositoryTest {
     }
 
     @Test
-    @DisplayName("@Query를 이용한 상품 조회 테스트")
+    @DisplayName("@Query를 이용한 유저 조회 테스트")
     public void findByUserDescription2(){
         this.createMemberList();
         List<Member> memberList =
@@ -101,50 +105,58 @@ class MemberRepositoryTest {
             System.out.println(member.toString());
         }
     }
-    /*
 
-    *//*Querydsl 테스트 추가 부분*//*
     @Test
-    @DisplayName("Querydsl 조회 테스트1")
-    public void queryDslTest(){
-        this.createItemList();
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-        QItem qItem = QItem.item;
-        JPAQuery<Item> query  = queryFactory.selectFrom(qItem)
-                .where(qItem.itemSellStatus.eq(ItemSellStatus.SELL))
-                .where(qItem.itemDetail.like("%" + "테스트 상품 상세 설명" + "%"))
-                .orderBy(qItem.price.desc());
-
-        List<Item> itemList = query.fetch();
-
-        for(Item item : itemList){
-            System.out.println(item.toString());
+    @DisplayName("@Query를 이용한 유저 조회 테스트")
+    public void findByUserDescriptionByNative(){
+        this.createMemberList();
+        List<Member> memberList =
+                memberRepository.findByUserDescriptionByNative("실습 풀이7");
+        for(Member member : memberList){
+            System.out.println(member.toString());
         }
     }
 
-    public void createItemList3(){
+
+    //Querydsl 테스트 추가 부분
+    //사용할때 pom.xml에 추가해야 할 의존성 2개, 플러그인 1개
+    @Test
+    @DisplayName("Querydsl 조회 테스트1")
+    public void queryDslTest(){
+        this.createMemberList2();
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        QMember qMember = QMember.member;
+        JPAQuery<Member> query  = queryFactory.selectFrom(qMember)
+                .where(qMember.userRole.eq(UserRole.ADMIN))
+                .where(qMember.userDescription.like("%" + "실습 풀이3"+ "%"))
+                .orderBy(qMember.regTime.desc());
+
+        List<Member> memberList = query.fetch();
+
+        for(Member member : memberList){
+            System.out.println(member.toString());
+        }
+    }
+
+    public void createMemberList2(){
         for(int i=1;i<=5;i++){
-            Item item = new Item();
-            item.setItemNm("테스트 상품" + i);
-            item.setPrice(10000 + i);
-            item.setItemDetail("테스트 상품 상세 설명" + i);
-            item.setItemSellStatus(ItemSellStatus.SELL);
-            item.setStockNumber(100);
-            item.setRegTime(LocalDateTime.now());
-            item.setUpdateTime(LocalDateTime.now());
-            itemRepository.save(item);
+            Member member = new Member();
+            member.setUserNm("테스트 회원" + i);
+            member.setUserDescription("실습 풀이" + i);
+            member.setUserEmail("test"+i+"@naver.com");
+            member.setUserRole(UserRole.ADMIN);
+            member.setRegTime(LocalDateTime.now());
+            Member savedMember = memberRepository.save(member);
         }
 
         for(int i=6;i<=10;i++){
-            Item item = new Item();
-            item.setItemNm("테스트 상품" + i);
-            item.setPrice(10000 + i);
-            item.setItemDetail("테스트 상품 상세 설명" + i);
-            item.setItemSellStatus(ItemSellStatus.SOLD_OUT);
-            item.setStockNumber(0);
-            item.setRegTime(LocalDateTime.now());
-            item.setUpdateTime(LocalDateTime.now());
-            itemRepository.save(item);
+            Member member = new Member();
+            member.setUserNm("테스트 회원" + i);
+            member.setUserDescription("실습 풀이" + i);
+            member.setUserEmail("test"+i+"@naver.com");
+            member.setUserRole(UserRole.USER);
+            member.setRegTime(LocalDateTime.now());
+            Member savedMember = memberRepository.save(member);
         }
-    }*/
+    }
 }
