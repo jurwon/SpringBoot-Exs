@@ -12,6 +12,7 @@
     <thead>
     <tr>
         <td>순번</td>
+        <td>홀짝</td>
         <td>상품명</td>
         <td>상품설명</td>
         <td>가격</td>
@@ -20,7 +21,9 @@
     </thead>
     <tbody>
     <tr th:each="itemDto, status: ${itemDtoList}">
+        <td th:text="${status.index}"></td>
         <td th:switch="${status.even}">
+            <!--status.count로 판단(1부터 시작)-->
             <span th:case=true>짝수</span>
             <span th:case=false>홀수</span>
         </td>

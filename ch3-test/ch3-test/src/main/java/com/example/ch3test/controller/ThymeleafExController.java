@@ -32,7 +32,7 @@ public class ThymeleafExController {
         model.addAttribute("itemDto", itemDto);
         return "thymeleafEx/thymeleafEx02";
     }
-/*
+
     @GetMapping(value = "/ex03")
     public String thymeleafExample03(Model model){
 
@@ -88,6 +88,6 @@ public class ThymeleafExController {
     @GetMapping(value = "/ex07")
     public String thymeleafExample07(){
         return "thymeleafEx/thymeleafEx07";
-    }*/
+    }
 
 }
