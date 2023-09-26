@@ -4,6 +4,7 @@ import com.example.ch2testhomehork.constant_sjw0926.UserRole;
 import com.example.ch2testhomehork.entity_sjw0926.Member;
 import com.example.ch2testhomehork.entity_sjw0926.QMember;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.support.Querydsl;
 import org.springframework.test.context.TestPropertySource;
 import org.thymeleaf.util.StringUtils;
@@ -24,6 +26,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.data.domain.Sort.by;
 
 @SpringBootTest
 // 테스트를 하기위한 , 설정 파일을 분리했고, 로드.
@@ -187,7 +190,17 @@ class MemberRepositoryTest {
             booleanBuilder.and(qMember.userRole.eq(UserRole.ADMIN));
         }
 
-        Pageable pageable = PageRequest.of(0, 5);
+        //정렬 순서 옵션 추가 부분1
+        //예제 : MemberRepository.findAll(query, 0, Integer.MAX_VALUE.field1.asc(),_personInventory.field2.asc())
+
+        //정렬 순서 옵션 추가 부분2
+        //예제 : Pageable pageable = PageRequest.of(0,10, Sort.by("gno").descending());
+        //      Page<Guestbook> result = guestbookRepository.findAll(builder,pageable); //
+        //코드 : Pageable pageable = PageRequest.of(0, 5, Sort.by("id").descending());
+
+        //원본
+        //Pageable pageable = PageRequest.of(0, 5);
+        Pageable pageable = PageRequest.of(0, 5, Sort.by("id").descending());
         Page<Member> itemPagingResult = memberRepository.findAll(booleanBuilder, pageable);
         System.out.println("total elements : " + itemPagingResult. getTotalElements ());
 
