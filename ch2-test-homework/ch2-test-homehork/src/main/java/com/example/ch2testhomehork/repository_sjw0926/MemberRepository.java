@@ -18,8 +18,9 @@ import java.util.Optional;
 // 임시로 사용하기 위해서, 메모리 위에 작업을 한다.
 // 기본설정 파일과, 테스트를 위한 설정 파일을 2개 분리해서 작업 중.
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
-    //public interface MemberRepository extends JpaRepository<Member, Long>, QuerydslPredicateExecutor<Member> {
+//public interface MemberRepository extends JpaRepository<Member, Long> {
+    //"유저 Querydsl 조회 테스트 2"에서 사용    
+public interface MemberRepository extends JpaRepository<Member, Long>, QuerydslPredicateExecutor<Member> {
 
 
     List<Member> findByUserNm(String userNm);
@@ -31,7 +32,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     //Optional<Member> findById(Long id);
 
 
-
+    //@Query 실습
     @Query("select m from Member m where m.userDescription like " +
             "%:userDescription% order by m.regTime desc")
     List<Member> findByUserDescription2(@Param("userDescription") String userDescription);

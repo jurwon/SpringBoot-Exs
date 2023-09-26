@@ -3,14 +3,19 @@ package com.example.ch2testhomehork.repository_sjw0926;
 import com.example.ch2testhomehork.constant_sjw0926.UserRole;
 import com.example.ch2testhomehork.entity_sjw0926.Member;
 import com.example.ch2testhomehork.entity_sjw0926.QMember;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.Querydsl;
 import org.springframework.test.context.TestPropertySource;
+import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -157,6 +162,38 @@ class MemberRepositoryTest {
             member.setUserRole(UserRole.USER);
             member.setRegTime(LocalDateTime.now());
             Member savedMember = memberRepository.save(member);
+        }
+    }
+
+    @Test
+    @DisplayName("유저 Querydsl 조회 테스트 2")
+    public void queryDslTest2(){
+
+        this.createMemberList2();
+
+        //실습 위한 더미 data
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        QMember qMember = QMember.member;
+        String userDescription = "실습 풀이";
+        String memberUserRole = "ADMIN";
+
+        //querydsl 사용할 때 조건 담는 클래스
+        booleanBuilder.and(qMember.userDescription.like("%" + userDescription + "%"));
+        //booleanBuilder.and(qMember.id.gt(5)); //이거 조회안됨 수정 요망
+        System.out.println(UserRole.ADMIN);
+
+        //StringUtils : 첫번째, 두번째 문자열 비교(thymleaf밑에 있음)
+        if(StringUtils.equals(memberUserRole, UserRole.ADMIN)){
+            booleanBuilder.and(qMember.userRole.eq(UserRole.ADMIN));
+        }
+
+        Pageable pageable = PageRequest.of(0, 5);
+        Page<Member> itemPagingResult = memberRepository.findAll(booleanBuilder, pageable);
+        System.out.println("total elements : " + itemPagingResult. getTotalElements ());
+
+        List<Member> resultMemberList = itemPagingResult.getContent();
+        for(Member resultMember: resultMemberList){
+            System.out.println(resultMember.toString());
         }
     }
 }
