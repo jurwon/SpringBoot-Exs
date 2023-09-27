@@ -12,11 +12,15 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ch1-2-test" target="11" />
+      <module name="ch2-test" target="11" />
       <module name="ch2-test-homework" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ch1-2-test" options="-parameters" />
+      <module name="ch2-test" options="-parameters" />
       <module name="ch2-test-homehork" options="-parameters" />
       <module name="ch2-test-homework" options="-parameters" />
       <module name="ch3-test" options="-parameters" />
