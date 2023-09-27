@@ -38,6 +38,10 @@ class MemberServiceTest {
     public void saveMemberTest(){
         Member member = createMember();
         Member savedMember = memberService.saveMember(member);
+
+        System.out.println("member.getEmail() : "+member.getEmail());
+        System.out.println("savedMember.getEmail() : "+ savedMember.getEmail());
+
         assertEquals(member.getEmail(), savedMember.getEmail());
         assertEquals(member.getName(), savedMember.getName());
         assertEquals(member.getAddress(), savedMember.getAddress());
@@ -53,6 +57,7 @@ class MemberServiceTest {
         memberService.saveMember(member1);
         Throwable e = assertThrows(IllegalStateException.class, () -> {
             memberService.saveMember(member2);});
+        System.out.println("e.getMessage() : "+ e.getMessage());
         assertEquals("이미 가입된 회원입니다.", e.getMessage());
     }
 }
