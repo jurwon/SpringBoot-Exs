@@ -17,7 +17,10 @@ public class Cart extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    /*@OneToOne(fetch = FetchType.LAZY)*/
+
+    /*EAGER : 즉시 전략*/
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="member_id")
     private Member member;
 

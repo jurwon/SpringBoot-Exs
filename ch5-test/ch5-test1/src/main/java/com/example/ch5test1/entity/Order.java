@@ -19,6 +19,7 @@ public class Order extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    /*@ManyToOne()*/
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -27,8 +28,15 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus; //주문상태
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL
+    /* eager :  연관 없는 테이블도 전부 다 조회 해서 성능상 이슈 발생
+       lazy : 해당 테이블만 조회 */
+     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL
             , orphanRemoval = true, fetch = FetchType.LAZY)
+
+    /*orphanRemoval = true : 연쇄 cascade설정 여부*/
+    /*@OneToMany(mappedBy = "order", cascade = CascadeType.ALL
+            , orphanRemoval = true, fetch = FetchType.EAGER)*/
+   /* @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)*/
     private List<OrderItem> orderItems = new ArrayList<>();
 
 }

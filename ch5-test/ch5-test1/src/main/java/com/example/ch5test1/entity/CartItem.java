@@ -15,6 +15,7 @@ public class CartItem extends BaseEntity {
     @Column(name = "cart_item_id")
     private Long id;
 
+    //cartitem이 many : cart가 one
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cart_id")
     private Cart cart;

@@ -30,6 +30,7 @@ class OrderTest {
     @Autowired
     ItemRepository itemRepository;
 
+    //중간 저장소 관리 : 중간저장소 -> db / 중간저장소 clear
     @PersistenceContext
     EntityManager em;
 
@@ -62,22 +63,41 @@ class OrderTest {
             Item item = this.createItem();
             itemRepository.save(item);
             OrderItem orderItem = new OrderItem();
+
+            //중요
             orderItem.setItem(item);
             orderItem.setCount(10);
             orderItem.setOrderPrice(1000);
             orderItem.setOrder(order);
+            
+            //중요
             order.getOrderItems().add(orderItem);
         }
 
+        //주문 엔티티 클래스의 중간테이블에 저장 및 실제 테이블에 저장
         orderRepository.saveAndFlush(order);
+        //중간 테이블 비우기
+        // 조회시, 연관 관계 테이블이 조인되면서, 같이 참조 되는 부분 확인
         em.clear();
 
+        // 조회시 중간 테이블의 내용이 비워져서, 실제 테이블에서 내용 가져올 때
+        //참조하는 테이블이 뭐가 되는지 봐야됨
+        //현재 lazy, 지연로딩이지만
+        // 즉시 로딩 eager, 이걸로 설정되는 경우, 연관 없는 테이블도 
+        //전부 다 조회 해서 성능상 이슈 발생
         Order savedOrder = orderRepository.findById(order.getId())
                 .orElseThrow(EntityNotFoundException::new);
         assertEquals(3, savedOrder.getOrderItems().size());
     }
 
     public Order createOrder(){
+        // 주문 ( 주문_상품 을 요소로 하는 리스트, 멤버) ->
+        // 주문_상품 추가 ->
+        // 상품 아이템 추가 ->
+        // 주문 상품 아이템들을 요소로 가지는 리스트에 추가 ->
+        // 회원 추가 ->
+        // 주문, 회원 추가(주문자)
+
         Order order = new Order();
         for(int i=0;i<3;i++){
             Item item = createItem();
@@ -109,8 +129,12 @@ class OrderTest {
     public void lazyLoadingTest(){
         Order order = this.createOrder();
         Long orderItemId = order.getOrderItems().get(0).getId();
+        // 실제 디비에 반영
         em.flush();
+        // 중간 저장소를 비우기 전에 orderItemId, 주문_상품의 번호 기록
         em.clear();
+        //주문_상품을 조회시, 실제 디비에서 찾기 할때
+        // 연관 있는 것만 조회(lazy) or 연관 없는 것도 조회(eager)
         OrderItem orderItem = orderItemRepository.findById(orderItemId)
                 .orElseThrow(EntityNotFoundException::new);
         System.out.println("Order class : " + orderItem.getOrder().getClass());
