@@ -55,6 +55,8 @@ public class MemberController {
         return "redirect:/";
     }
 
+    
+    //폼만 제공, 실제 처리는 시큐리티가 처리
     @GetMapping(value = "/login")
     public String loginMember(){
         return "/member/memberLoginForm";
@@ -66,4 +68,9 @@ public class MemberController {
         return "/member/memberLoginForm";
     }
 
+
+    @GetMapping(value = "/mypage")
+    public String showMypage(){
+        return "/member/mypageForm";
+    }
 }

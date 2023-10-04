@@ -93,8 +93,8 @@
         <version>5.5.1</version>
     </dependency>
 
-   <!-- 타임리프에서 스프링 시큐리티 연동해서 해당권한에 맞게끔
-        뷰에 권한여부에 따라 보여주는 페이지 설정 -->
+   <!-- 타임리프에서 스프링 시큐리티.
+        뷰에 권한에 따라 보여주는 페이지 설정 -->
     <dependency>
         <groupId>org.thymeleaf.extras</groupId>
         <artifactId>thymeleaf-extras-springsecurity5</artifactId>
