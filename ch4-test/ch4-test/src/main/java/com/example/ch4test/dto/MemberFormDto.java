@@ -8,6 +8,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
+//회원 가입시 입력받은 data 담을 용도
+// @NotBlank : 값 필수, 비워두면 안됨
+// @NotEmpty : 값 필수, 비워두면 안됨, 공백 유무
 @Getter @Setter
 public class MemberFormDto {
 

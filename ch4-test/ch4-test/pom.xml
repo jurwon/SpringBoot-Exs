@@ -45,6 +45,8 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -57,13 +59,14 @@
             <version>2.5.2</version>
         </dependency>
 
-
+        <!--타임리프 공통 레이아웃-->
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
 
         </dependency>
 
+        <!--유효성 검사-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
@@ -82,6 +85,7 @@
             <version>5.0.0</version>
         </dependency>
 
+    <!--스프링 단위 테스트-->
     <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-test</artifactId>
@@ -89,11 +93,14 @@
         <version>5.5.1</version>
     </dependency>
 
+   <!-- 타임리프에서 스프링 시큐리티 연동해서 해당권한에 맞게끔
+        뷰에 권한여부에 따라 보여주는 페이지 설정 -->
     <dependency>
         <groupId>org.thymeleaf.extras</groupId>
         <artifactId>thymeleaf-extras-springsecurity5</artifactId>
     </dependency>
     </dependencies>
+
 
     <build>
         <plugins>

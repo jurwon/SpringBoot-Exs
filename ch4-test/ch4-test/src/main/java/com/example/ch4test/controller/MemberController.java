@@ -20,24 +20,30 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class MemberController {
 
+    //동네 2번
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
     //폼띄우기 : get방식(웹브라우저에서 요청)
     @GetMapping(value = "/new")
     public String memberForm(Model model){
+        //서버 -> 뷰, 데이터 전달
         model.addAttribute("memberFormDto", new MemberFormDto());
+        // 뷰 리졸버, 타임리프 사용해서 회원가입 폼 html로 전달
         return "member/memberForm";
     }
 
     //@Valid로 MemberFormDto에 걸려있는 유효성 체크
     @PostMapping(value = "/new")
+    //BindingResult : 유효성 체크에서, 오류 발생시, 메시지 결과 확인하는 용도
     public String newMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model){
 
+        //에러 검출
         if(bindingResult.hasErrors()){
             return "member/memberForm";
         }
 
+        //정상처리
         try {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);

@@ -22,10 +22,14 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 @TestPropertySource(locations="classpath:application-test.properties")
 class MemberControllerTest {
 
+    //테스트 위한 필수 3요소
+    
     @Autowired
+    //로그인 처리 서비스
     private MemberService memberService;
 
     @Autowired
+    //더비 데이터
     private MockMvc mockMvc;
 
     @Autowired
@@ -37,6 +41,7 @@ class MemberControllerTest {
         memberFormDto.setName("홍길동");
         memberFormDto.setAddress("서울시 마포구 합정동");
         memberFormDto.setPassword(password);
+        //메모리에 저장
         Member member = Member.createMember(memberFormDto, passwordEncoder);
         return memberService.saveMember(member);
     }
@@ -47,6 +52,7 @@ class MemberControllerTest {
         String email = "test@email.com";
         String password = "1234";
         this.createMember(email, password);
+        //mockMvc : 더미데이터
         mockMvc.perform(formLogin().userParameter("email")
                 .loginProcessingUrl("/members/login")
                 .user(email).password(password))
