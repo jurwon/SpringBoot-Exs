@@ -11,6 +11,7 @@
         <module name="ch3-test" />
         <module name="ch2-test-homehork" />
         <module name="ch2-test" />
+        <module name="ch5-test1" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -26,6 +27,7 @@
       <module name="ch2-test-homework" options="" />
       <module name="ch3-test" options="-parameters" />
       <module name="ch4-test" options="-parameters" />
+      <module name="ch5-test1" options="-parameters" />
     </option>
   </component>
 </project>
