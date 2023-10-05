@@ -5,15 +5,18 @@
 <div th:fragment="header">
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class = "container">
+            <div class = "header">
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
                 aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon">
+                <span class="material-symbols-outlined">storefront</span>
+            </span>
         </button>
-        <a class="navbar-brand" href="/"><span class="material-symbols-outlined">storefront</span></a>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <a class="navbar-brand" href="/"><span class="material-symbols-outlined">storefront</span></a>
                 <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                     <a class="nav-link" href="/admin/item/new">상품 등록</a>
                 </li>
@@ -42,6 +45,7 @@
                 <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
+        </div>
         </div>
         </div>
     </nav>

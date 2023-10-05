@@ -57,4 +57,9 @@ public class MemberController {
         return "/member/memberLoginForm";
     }
 
+    @GetMapping(value = "/mypage")
+    public String mypageForm(){
+        return "member/mypageForm";
+    }
+
 }

@@ -21,7 +21,7 @@ body {
     margin-left: 200px;
     margin-right: 200px;
 }
-.container{
+.header{
     display: flex;
     height: 90px;
     padding: 3rem 3rem;
@@ -54,4 +54,18 @@ body {
              'GRAD' 0,
              'opsz' 60
 
+ }
+ .profile{
+     display: flex;
+     justify-content: center; /* 가로 중앙 정렬 */
+     align-items: center; /* 세로 중앙 정렬 */
+     height: 30vh; /* 화면 높이에 따라 조절 */
+     background-color: azure;
+ }
+ .board{
+     display: flex;
+     justify-content: center; /* 가로 중앙 정렬 */
+     align-items: center; /* 세로 중앙 정렬 */
+     height: 70vh; /* 화면 높이에 따라 조절 */
+     background-color: beige;
  }
