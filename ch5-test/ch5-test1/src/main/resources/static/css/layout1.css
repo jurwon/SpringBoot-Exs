@@ -20,6 +20,7 @@ body {
     margin-top: 50px;
     margin-left: 200px;
     margin-right: 200px;
+
 }
 .header{
     display: flex;
@@ -55,6 +56,10 @@ body {
              'opsz' 60
 
  }
+ .con_padding{
+     padding: 20px;
+
+ }
  .profile{
      display: flex;
      justify-content: center; /* 가로 중앙 정렬 */
@@ -62,8 +67,19 @@ body {
      height: 30vh; /* 화면 높이에 따라 조절 */
      background-color: azure;
  }
+ .pro_photo{
+     width: 30vh;
+     min-height: 50px;
+     aspect-ratio: 3/1;
+     background: #352F44;
+ }
+ .pro_detail{
+     width: 70vh;
+     min-height: 50px;
+     aspect-ratio: 3/1;
+     background: darkgray;
+ }
  .board{
-     display: flex;
      justify-content: center; /* 가로 중앙 정렬 */
      align-items: center; /* 세로 중앙 정렬 */
      height: 70vh; /* 화면 높이에 따라 조절 */
