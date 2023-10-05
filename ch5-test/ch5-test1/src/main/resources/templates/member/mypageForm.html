@@ -7,17 +7,22 @@
 <div layout:fragment="content">
     <div class = "con_padding">
         <div class="profile">
-            <div class="pro_photo">
-                여기는 프로필 자리입니다.
+            <div class ="box_margin">
+                <div class="box">
+                    <img class="pro_photo" src="/images/코알라.jpg">
+                </div>
             </div>
             <section class="pro_detail">
-                <div>
-                    아이디 + 팔로잉버튼 + 프로필 편집버튼
+                <div class = "detail">
+                    <h2>아이디</h2>
+                    <button type="button" class="btn btn-secondary">팔로잉</button>
+                    <button type="button" class="btn btn-secondary">프로필 편집</button>
                 </div>
-                <ul>
-                    <li>게시물</li>
-                    <li>팔로워</li>
-                    <li>팔로우</li>
+                <ul class ="detail_list">
+                    <li>게시물 <span> 15</span>
+                        <a>팔로워</a>
+                        <a>팔로우</a>
+                    </li>
                 </ul>
                 <div>
                     신뢰등급 + 게시글 작성 버튼
