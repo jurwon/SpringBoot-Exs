@@ -14,9 +14,11 @@
         <module name="ch5-test1" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="11">
       <module name="ch1-2-test" target="11" />
       <module name="ch2-test-homework" target="11" />
+      <module name="ch4-test2" target="11" />
+      <module name="ch4-test3" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -24,9 +26,11 @@
       <module name="ch1-2-test" options="-parameters" />
       <module name="ch2-test" options="-parameters" />
       <module name="ch2-test-homehork" options="-parameters" />
-      <module name="ch2-test-homework" options="" />
+      <module name="ch2-test-homework" options="-parameters" />
       <module name="ch3-test" options="-parameters" />
       <module name="ch4-test" options="-parameters" />
+      <module name="ch4-test2" options="-parameters" />
+      <module name="ch4-test3" options="-parameters" />
       <module name="ch5-test1" options="-parameters" />
     </option>
   </component>
