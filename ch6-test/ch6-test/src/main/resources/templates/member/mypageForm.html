@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+
+<div layout:fragment="content">
+    <div class = "con_padding">
+        <div class="profile">
+            <div class ="box_margin">
+                <div class="box">
+                    <img class="pro_photo" src="/images/코알라.jpg">
+                </div>
+            </div>
+            <section class="pro_detail">
+                <div class = "detail">
+                    <h2>아이디</h2>
+                    <button type="button" class="btn btn-secondary">팔로잉</button>
+                    <button type="button" class="btn btn-secondary">프로필 편집</button>
+                </div>
+                <ul class ="detail_list">
+                    <li>게시물 <span> 15</span>
+                        <a href="#">팔로워<span> 15</span></a>
+                        <a href="#">팔로우<span> 15</span></a>
+                    </li>
+                </ul>
+                <div>
+                    신뢰등급 + 게시글 작성 버튼
+                </div>
+            </section>
+
+        </div>
+        <hr>
+        <div class="board">
+            여기는 게시글 자리입니다
+            <div>
+
+            </div>
+            <div>
+
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</html>
