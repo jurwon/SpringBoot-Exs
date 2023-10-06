@@ -1,7 +1,7 @@
-package com.example.ch5test1.entity;
+package com.example.ch6test.entity;
 
-import com.example.ch5test1.constant.Role;
-import com.example.ch5test1.dto.MemberFormDto;
+import com.example.ch6test.constant.Role;
+import com.example.ch6test.dto.MemberFormDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
