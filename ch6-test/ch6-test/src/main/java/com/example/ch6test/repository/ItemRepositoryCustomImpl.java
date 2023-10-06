@@ -66,6 +66,8 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 
         QueryResults<Item> results = queryFactory
                 .selectFrom(QItem.item)
+
+                //여기부터 조건절
                 .where(regDtsAfter(itemSearchDto.getSearchDateType()),
                         searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
                         searchByLike(itemSearchDto.getSearchBy(),
@@ -75,7 +77,9 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                 .limit(pageable.getPageSize())
                 .fetchResults();
 
+        //검색 결과 데이터들(페이징 처리됨)
         List<Item> content = results.getResults();
+        //검색 조건 결과의 총 갯수
         long total = results.getTotal();
 
         return new PageImpl<>(content, pageable, total);
@@ -92,6 +96,8 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 
         QueryResults<MainItemDto> results = queryFactory
                 .select(
+                        //@QueryProjection의 생성자를 이용해서
+                        //바로 검색 조건으로 자동 매핑
                         new QMainItemDto(
                                 item.id,
                                 item.itemNm,

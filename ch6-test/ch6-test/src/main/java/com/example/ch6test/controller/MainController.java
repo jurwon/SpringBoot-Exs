@@ -23,10 +23,13 @@ public class MainController {
     public String main(ItemSearchDto itemSearchDto, Optional<Integer> page, Model model){
 
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 6);
+
+        //검색 조건과 페이징을 같이 처리해서 데이터를 가지고 온 목록
         Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
 
-        model.addAttribute("items", items);
-        model.addAttribute("itemSearchDto", itemSearchDto);
+        //뷰에 전달
+        model.addAttribute("items", items); // 검색 결과 item
+        model.addAttribute("itemSearchDto", itemSearchDto); //검색 조건
         model.addAttribute("maxPage", 5);
 
         return "main";
