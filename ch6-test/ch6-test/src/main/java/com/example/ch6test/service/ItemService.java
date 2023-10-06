@@ -54,9 +54,12 @@ public class ItemService {
 
     @Transactional(readOnly = true)
     public ItemFormDto getItemDtl(Long itemId){
+        //entity (서버에서 가져옴)
         List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
+        //dto (전달용)
         List<ItemImgDto> itemImgDtoList = new ArrayList<>();
         for (ItemImg itemImg : itemImgList) {
+            //db정보 dto에 담아옴
             ItemImgDto itemImgDto = ItemImgDto.of(itemImg);
             itemImgDtoList.add(itemImgDto);
         }
@@ -67,9 +70,12 @@ public class ItemService {
         itemFormDto.setItemImgDtoList(itemImgDtoList);
         return itemFormDto;
     }
-
+    
+    
+    //상품 수정 처리 로직
     public Long updateItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
         //상품 수정
+        //기존 아이템 불러오기
         Item item = itemRepository.findById(itemFormDto.getId())
                 .orElseThrow(EntityNotFoundException::new);
         item.updateItem(itemFormDto);

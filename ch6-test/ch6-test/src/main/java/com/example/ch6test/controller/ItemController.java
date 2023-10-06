@@ -34,6 +34,7 @@ public class ItemController {
         return "item/itemForm";
     }
 
+    //상품 등록
     @PostMapping(value = "/admin/item/new")
     public String itemNew(@Valid ItemFormDto itemFormDto, BindingResult bindingResult,
                           Model model, @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList){
@@ -57,11 +58,14 @@ public class ItemController {
         return "redirect:/";
     }
 
+    //상품 상세페이지 폼
     @GetMapping(value = "/admin/item/{itemId}")
     public String itemDtl(@PathVariable("itemId") Long itemId, Model model){
 
         try {
+            // 상품번호가 23이면, 실제 디비에서 조회 후 내용 dto에 담기
             ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
+            //dto에 담은 내용을 모델 인스턴스에 담아서 뷰로 전달
             model.addAttribute("itemFormDto", itemFormDto);
         } catch(EntityNotFoundException e){
             model.addAttribute("errorMessage", "존재하지 않는 상품 입니다.");
@@ -72,6 +76,7 @@ public class ItemController {
         return "item/itemForm";
     }
 
+    //상품 상세 페이지에서 수정시 처리
     @PostMapping(value = "/admin/item/{itemId}")
     public String itemUpdate(@Valid ItemFormDto itemFormDto, BindingResult bindingResult,
                              @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model){

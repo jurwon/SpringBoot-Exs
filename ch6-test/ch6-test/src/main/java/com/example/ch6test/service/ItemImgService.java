@@ -35,22 +35,26 @@ public class ItemImgService {
             imgUrl = "/images/item/" + imgName;
         }
 
-        //상품 이미지 정보 저장
+        //상품 이미지 정보 저장 (중간저장소 -> db)
         itemImg.updateItemImg(oriImgName, imgName, imgUrl);
         itemImgRepository.save(itemImg);
     }
 
     public void updateItemImg(Long itemImgId, MultipartFile itemImgFile) throws Exception{
         if(!itemImgFile.isEmpty()){
+            //savedItemImg : 영속성 상태(entity)이므로 데이터 변경되면 자동 감지되어,
+            // 트랜잭션 끝날 때 update쿼리 실행
             ItemImg savedItemImg = itemImgRepository.findById(itemImgId)
                     .orElseThrow(EntityNotFoundException::new);
 
-            //기존 이미지 파일 삭제
+            // 기존 이미지 파일 삭제, 물리저장소의 내용 지우기
+            // 디비에는 삭제가 파일명을 대체
             if(!StringUtils.isEmpty(savedItemImg.getImgName())) {
                 fileService.deleteFile(itemImgLocation+"/"+
                         savedItemImg.getImgName());
             }
 
+            //새 물리 파일 등록
             String oriImgName = itemImgFile.getOriginalFilename();
             String imgName = fileService.uploadFile(itemImgLocation, oriImgName, itemImgFile.getBytes());
             String imgUrl = "/images/item/" + imgName;
