@@ -7,17 +7,25 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ch4-test" />
         <module name="ch3-test" />
         <module name="ch2-test-homehork" />
+        <module name="ch7_8test" />
+        <module name="ch2-test-homework" />
+        <module name="ch5-test1" />
+        <module name="ch4-test" />
         <module name="ch6-test" />
         <module name="ch2-test" />
-        <module name="ch5-test1" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="ch5-test1.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ch1-2-test" target="11" />
-      <module name="ch2-test-homework" target="11" />
       <module name="ch4-test2" target="11" />
       <module name="ch4-test3" target="11" />
     </bytecodeTargetLevel>
@@ -25,15 +33,14 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ch1-2-test" options="-parameters" />
-      <module name="ch2-test" options="-parameters" />
-      <module name="ch2-test-homehork" options="-parameters" />
-      <module name="ch2-test-homework" options="" />
-      <module name="ch3-test" options="-parameters" />
-      <module name="ch4-test" options="-parameters" />
+      <module name="ch2-test" options="" />
+      <module name="ch2-test-homework" options="-parameters" />
+      <module name="ch3-test" options="" />
+      <module name="ch4-test" options="" />
       <module name="ch4-test2" options="-parameters" />
-      <module name="ch4-test3" options="" />
-      <module name="ch5-test1" options="-parameters" />
+      <module name="ch4-test3" options="-parameters" />
       <module name="ch6-test" options="-parameters" />
+      <module name="ch7_8test" options="-parameters" />
     </option>
   </component>
 </project>
